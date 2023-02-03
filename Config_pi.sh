@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#print ip and wait 5 sec
+ip a
+sleep 5
+
 # Enable SSH
 sudo systemctl enable ssh
 sudo systemctl start ssh
@@ -16,6 +20,9 @@ sudo apt-get dist-upgrade -y
 
 # Install Docker, Docker Compose, and Docker.io
 sudo apt-get install docker.io docker-compose git -y
+
+#install python3 if not already installed
+apt-get install python3 -y
 
 # Enable USB and WiFi
 sudo echo "dtoverlay=dwc2" >> /boot/config.txt
