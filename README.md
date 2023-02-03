@@ -55,7 +55,7 @@ chmod +x Config_pi.sh
 ./Config_pi.sh
 ```
 
-### Edit telegraf.conf file
+### Edit telegraf.conf file and the Elektricity_meter.py
 
 ```telegraf.conf
 [[inputs.exec]]
@@ -63,6 +63,10 @@ chmod +x Config_pi.sh
   commands = ["cat /dev/ttyUSB0"]
   timeout = "5s"
   data_format = "influx"
+```
+```Elektricity_meter.py
+# Change your serial port here:
+serialport = '/dev/ttyUSB0'
 ```
 ### Docker compose use
 To run the docker container use the following command and wait till done.
