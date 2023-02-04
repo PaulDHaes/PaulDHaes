@@ -9,8 +9,8 @@ services:
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
-    - telegraf.conf:/etc/telegraf/telegraf.conf
-    - Elektricity_meter.py:/home/Elektricity_meter.py
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf:r
+    - ./Elektricity_meter.py:/home/Elektricity_meter.py:r
     depends_on:
       - influxdb
     links:
@@ -42,9 +42,9 @@ services:
     volumes:
       - influxdb-storage:/var/lib/influxdb
     environment:
-      - INFLUXDB_DB=Home
-      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
-      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+      - INFLUXDB_DB=${INFLUXDB_DB}
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
       - DOCKER_INFLUXDB_INIT_ORG=Meter
       - DOCKER_INFLUXDB_INIT_BUCKET=pi
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
@@ -60,7 +60,7 @@ services:
     depends_on:
       - influxdb
     environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
 volumes:
   influxdb-storage:

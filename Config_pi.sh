@@ -23,6 +23,9 @@ sudo apt-get install docker.io docker-compose git -y
 
 #install python3 if not already installed
 apt-get install python3 -y
+pip install tabulate -y
+pip install pyserial -y
+pip install crcmod -y
 
 # Enable USB and WiFi
 sudo echo "dtoverlay=dwc2" >> /boot/config.txt
@@ -41,9 +44,9 @@ sudo systemctl disable telnet.socket
 # Update the kernel to the latest version
 sudo rpi-update
 
-# Clone the repository and run the docker-compose file
-# sudo git clone [REPO_URL]
-# cd [REPO_NAME]
+# USB permission change so docker can access the port.
+chmod 777 /dev/ttyUSB0
+
 sudo docker-compose up -d
 
 # Restart Raspberry Pi to apply changes
