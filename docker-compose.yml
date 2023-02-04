@@ -9,8 +9,8 @@ services:
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
-    - ./telegraf.conf:/etc/telegraf/telegraf.conf:r
-    - ./Elektricity_meter.py:/home/Elektricity_meter.py:r
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - ./Elektricity_meter.py:/home/Elektricity_meter.py:ro
     depends_on:
       - influxdb
     links:
@@ -36,7 +36,7 @@ services:
   influxdb:
     container_name: InfluxDB
     restart: always
-    image: influxdb:arm32v7
+    image: influxdb:latest
     ports:
       - '8086:8086'
     volumes:
