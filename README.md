@@ -4,7 +4,7 @@
 ## Prequsits
 - Raspberry pi 3b/ 3b+ /4
 - Prefeared 16GB or more sd card for storage
-- Raspbian OS 32/64 bit *if prefeared you can use gui version but is not needed.*
+- Raspbian OS 64 bit *if prefeared you can use gui version but is not needed.*
 - Special RJ11 to usb cable that has converter build in
   [Buy cable](https://webshop.cedel.nl/Slimme-meter-kabel-P1-naar-USB?gclid=Cj0KCQjwkOqZBhDNARIsAACsbfLt-R-eDRTF_N71Z2UZsGzT_Ve1b7lJw5-FMawz6sVlJQ9zLBQNe-MaAux8EALw_wcB)
 - Enable the P1 port on the smart meter this can be done normaly on the distributor website.
@@ -18,12 +18,13 @@ Data from Elektricity meter on port P1 this sends data every second -> Rapsberry
 - The script enables SSH
 - Disables swap memmory -> this is for the degradation prevention of the SD card
 - Does a full update
-- installs all nessesary programs
+- installs all nessesary programs docker, python3 pip and libs for the python script
 - checks if wifi and usb is on and give output on what port the USB is on 
-	*if USB port is plugged in to the smart meter then it will print which USB your on handy for telegraf*
+  *if USB port is plugged in to the smart meter then it will print which USB your on handy for telegraf*
 - Does some optimazation for docker
 - Disables the unnescesery stuff like bluetooth ,vnc and telent
 - Updates the kernel
+- Changes the UBS permission to let the telegraf container read the USB port
 - Does docker-compose up command to pull the container and make a config
 - Reboots
 
@@ -45,6 +46,7 @@ This is docker container manager this is not nescesry to have this but it easy t
 This script reads the data from the P1 port of the smart meter and transform it to readable data that can be parsed. The smart meter spits out obiscodes and these needs to linked to what it actual is after that the script reads the data and transforms it to a json like format.
 
 ## Install instructions
+### Passwords, usernames and databases are defined in the .env file
 ### Install Config_pi.sh
 This script is if you want to start form a fresh install of Raspbian OS.
 to install launche the terminal if you use the GUI version and do:
@@ -80,6 +82,7 @@ Setup grafana so it can querry data from influxdb. This can be done by simply ad
 ## Make it your own
 - Edit the telegraf config so you can have more data from maybe other devices of you network.
 - Make your own custom grafana dashboards.
+- Edit the .env file to set better passwords.
 
 ## Custom telegraf container?
 
@@ -91,3 +94,4 @@ Setup grafana so it can querry data from influxdb. This can be done by simply ad
 - [ ] Add the USB baudrate in script
 - [ ] Make own docker container to easly download
 - [ ] secure the communication by using SSL
+- [ ] auto edit the grafana dashboard to set all the value
