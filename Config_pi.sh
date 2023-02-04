@@ -19,7 +19,7 @@ sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 
 # Install Docker, Docker Compose, and Docker.io
-sudo apt-get install docker.io docker-compose git -y
+sudo apt-get install docker.io docker-compose
 
 #install python3 if not already installed
 apt-get install python3 -y

@@ -36,7 +36,7 @@ services:
   influxdb:
     container_name: InfluxDB
     restart: always
-    image: influxdb:latest
+    image: influxdb:arm32v7
     ports:
       - '8086:8086'
     volumes:
