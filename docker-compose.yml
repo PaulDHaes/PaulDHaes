@@ -10,7 +10,7 @@ services:
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
     - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
-    - ./Elektricity_meter.py:/home/Elektricity_meter.py:ro
+    - ./Elektricity_meter.py:/home/Elektricity_meter.py
     depends_on:
       - influxdb
     links:
@@ -22,15 +22,9 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=pi
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
   portainer:
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer:latest
     restart: always
-    container_name: portainer
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./portainer-data:/data
+    container_name: Portainer
     ports:
       - 9000:9000
   influxdb:

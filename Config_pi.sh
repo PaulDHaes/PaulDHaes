@@ -21,11 +21,16 @@ sudo apt-get dist-upgrade -y
 # Install Docker, Docker Compose, and Docker.io
 sudo apt-get install docker.io docker-compose
 
-#install python3 if not already installed
+#telegraf container
 apt-get install python3 -y
-pip install tabulate -y
-pip install pyserial -y
-pip install crcmod -y
+# apt-get install nano -y
+# apt-get install sudo -y
+# sudo -u telegraf python3 /home/Elektricity_meter.py
+# chmod 777 /dev/ttyUSB0
+#usermod -aG sudo telegraf
+# pip install tabulate
+# pip install pyserial
+# pip install crcmod
 
 # Enable USB and WiFi
 sudo echo "dtoverlay=dwc2" >> /boot/config.txt
