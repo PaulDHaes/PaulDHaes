@@ -95,3 +95,4 @@ Setup grafana so it can querry data from influxdb. This can be done by simply ad
 - [ ] Make own docker container to easly download
 - [ ] secure the communication by using SSL
 - [ ] auto edit the grafana dashboard to set all the value
+- [ ] edit docker network so localhost can be set
