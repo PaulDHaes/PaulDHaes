@@ -4,8 +4,7 @@ services:
   telegraf:
     container_name: Telegraf
     restart: always
-    ## not working at the moment needs to have the baudspeed set to 9200 and needs a changes of chmod
-    image: telegraf:latest
+    image: pauldheas/smartmeter:latest
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
@@ -21,6 +20,9 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=Meter
       - DOCKER_INFLUXDB_INIT_BUCKET=pi
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
+    networks:
+      custom_network:
+        ipv4_address: 172.19.0.2
   portainer:
     image: portainer/portainer:latest
     restart: always
@@ -42,6 +44,9 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=Meter
       - DOCKER_INFLUXDB_INIT_BUCKET=pi
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=mytoken
+    networks:
+      custom_network:
+        ipv4_address: 172.19.0.3
   grafana:
     container_name: Grafana
     restart: always
@@ -56,6 +61,15 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    networks:
+      custom_network:
+        ipv4_address: 172.19.0.4
 volumes:
   influxdb-storage:
   grafana-storage:
+networks:
+  custom_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
