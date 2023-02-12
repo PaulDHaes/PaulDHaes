@@ -88,11 +88,11 @@ Setup grafana so it can querry data from influxdb. This can be done by simply ad
 
 ## TODO
 
-- [ ] Update docker container
+- [x] Update docker container
 - [ ] Add more functionality
-- [ ] Change storrage space issue
-- [ ] Add the USB baudrate in script
+- [ ] Explore storrage space issue
+- [x] Add the USB baudrate in script
 - [ ] Make own docker container to easly download
 - [ ] secure the communication by using SSL
 - [ ] auto edit the grafana dashboard to set all the value
-- [ ] edit docker network so localhost can be set
+- [x] edit docker network so localhost can be set
