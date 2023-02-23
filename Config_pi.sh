@@ -2,7 +2,7 @@
 
 #print ip and wait 5 sec
 ip a
-sleep 5
+sleep 3
 
 # Enable SSH
 sudo systemctl enable ssh
@@ -14,12 +14,12 @@ sudo dphys-swapfile uninstall
 sudo update-rc.d dphys-swapfile remove
 
 # Perform a full update
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 
 # Install Docker, Docker Compose, and Docker.io
-sudo apt-get install docker.io docker-compose
+sudo apt-get install docker.io docker-compose -y
 
 #telegraf container
 apt-get install python3 -y
