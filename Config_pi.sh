@@ -47,7 +47,7 @@ sudo systemctl disable vncserver-x11-serviced.service
 sudo systemctl disable telnet.socket
 
 # Update the kernel to the latest version
-sudo rpi-update
+sudo rpi-update -y
 
 # USB permission change so docker can access the port.
 chmod 777 /dev/ttyUSB0
