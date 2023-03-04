@@ -29,6 +29,9 @@ services:
     container_name: Portainer
     ports:
       - 9000:9000
+    volumes:
+      - data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
   influxdb:
     container_name: InfluxDB
     restart: always
@@ -67,6 +70,7 @@ services:
 volumes:
   influxdb-storage:
   grafana-storage:
+  data:
 networks:
   custom_network:
     driver: bridge
