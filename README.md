@@ -1,5 +1,5 @@
 
-# Belgium/Nederlands electricity dashboard raspberry pi for dummies
+# Belgium/Nederlands electricity dashboard for Raspberry pi
 
 ## Prequsits
 - Raspberry pi 3b/ 3b+ /4
@@ -92,7 +92,7 @@ Setup grafana so it can querry data from influxdb. This can be done by simply ad
 - [ ] Add more functionality
 - [ ] Explore storrage space issue
 - [x] Add the USB baudrate in script
-- [ ] Make own docker container to easly download
+- [x] Make own docker container to easly download
 - [ ] secure the communication by using SSL
 - [ ] auto edit the grafana dashboard to set all the value
 - [x] edit docker network so localhost can be set
