@@ -14,7 +14,7 @@ def read_p1_data():
             break
         data += line + '\n'
     return data
-# add other obis codes
+
 def parse_p1_data(data):
     data_dict = {}
     lines = data.split('\n')

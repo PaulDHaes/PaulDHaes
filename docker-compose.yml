@@ -1,4 +1,5 @@
 #add usb to telegraf?, Heimdal, pihole?
+#portainer info https://portainer-notes.readthedocs.io/en/latest/configuration.html
 version: "3.3"
 services:
   telegraf:
