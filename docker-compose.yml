@@ -17,6 +17,7 @@ services:
       - influxdb
     ports:
     - '127.0.0.1:8125:8125/udp'
+    tty: true
     environment: 
       - DOCKER_INFLUXDB_INIT_ORG=Meter
       - DOCKER_INFLUXDB_INIT_BUCKET=pi
