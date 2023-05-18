@@ -140,5 +140,5 @@ Normally this should fix it or you just need to wait 1-5 minutes.
 - [x] Make own docker container to easly download
 - [ ] secure the communication by using SSL
 - [ ] auto edit the grafana dashboard to set all the value
-- [ ] make influxdb api key and put it in telegraf.conf
+- [x] make influxdb api key and put it in telegraf.conf
 - [x] edit docker network
