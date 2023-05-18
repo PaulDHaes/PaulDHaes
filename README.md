@@ -18,12 +18,12 @@ Data from Elektricity meter on port P1 this sends data every second -> Rapsberry
 - The script enables SSH
 - Disables swap memmory -> this is for the degradation prevention of the SD card
 - Does a full update
-- installs all nessesary programs docker, python3 pip and libs for the python script
+- installs all nessesary programs docker, (python3 pip and libs for the python script) for debug
 - checks if wifi and usb is on and give output on what port the USB is on 
-  *if USB port is plugged in to the smart meter then it will print which USB your on handy for telegraf*
 - Does some optimazation for docker
-- Disables the unnescesery stuff like bluetooth ,vnc and telent
+- Disables the unnescesery stuff like bluetooth ,vnc and telnet
 - Updates the kernel
+- Installes openssl and makes a hex32 token for the influxdb bucket
 - Changes the UBS permission to let the telegraf container read the USB port
 - Does docker-compose up command to pull the container and make a config
 - Reboots
@@ -38,33 +38,70 @@ http://[Raspberrypi_IP]:8086
 ```
 #### grafana container
 This is a obsevery platform this means that we can observer all our data easily and clean. To access grafana just go to the raspberry pi following by adding port 3000. The username and passoword are already configured in the docker-compose file but it's recommend to changed it. 
+``` web
+http://[Raspberrypi_IP]:3000
+```
 #### telegraf container
 This is a server based agent that collects and send the data in this case to influxdb. This like all the other container has no webapplication running instead the port 8125 is used to collect the data. This has also mounts the usb port to that container aswel as the python script needed to fetch the data.
 #### portainer container
 This is docker container manager this is not nescesry to have this but it easy to mannage the containers and restart them. this has a webapplication on port 9000 and a mangement port on 8000 to conect to other portainers. 
+``` web
+http://[Raspberrypi_IP]:9000
+```
 ## Elektricity_meter.py
 This script reads the data from the P1 port of the smart meter and transform it to readable data that can be parsed. The smart meter spits out obiscodes and these needs to linked to what it actual is after that the script reads the data and transforms it to a json like format.
 
 ## Install instructions
 ### Passwords, usernames and databases are defined in the .env file
-### Install Config_pi.sh
-This script is if you want to start form a fresh install of Raspbian OS.
+### Install Pi_config.sh
+This script is here if you want to start form a fresh install of Raspbian OS.
 to install launche the terminal if you use the GUI version and do:
 ``` bash
 git clone [link of repo]
 cd [repo]
-chmod +x Config_pi.sh
-./Config_pi.sh
+chmod +x Pi_config.sh
+./Pi_config.sh
+```
+*If the Pi_config.sh script is not executed pleas execute the folowoing commands*
+
+``` bash
+apt-get update
+apt-get install docker.io docker-compose openssl
+influx_token=$(openssl rand -hex 32)
+sed -i "s|supercool_new_token|$influx_token|g" .env
+chmod 777 /dev/ttyUSB0
 ```
 
 ### Edit telegraf.conf file and the Elektricity_meter.py
-
+Edit out Water consumption with Gas if you know you only have Gas
 ```telegraf.conf
 [[inputs.exec]]
-## Dedault ttyUSB0 if USB is pluged into the top left port
-  commands = ["cat /dev/ttyUSB0"]
-  timeout = "5s"
-  data_format = "influx"
+  commands = ["python3 /home/Elektricity_meter.py"]
+  timeout = "10s"
+#  debug=True
+  data_format = "json"
+  json_string_fields = [
+    "All phases consumption",
+    "All phases production",
+    "Current_rate_(1_is_day_en_2_is_night",
+    "L1 consumption",
+    "L1 current",
+    "L1 production",
+    "L1 voltage",
+    "L2 consumption",
+    "L2 current",
+    "L2 production",  "L2 voltage",
+    "L3 consumption",
+    "L3 current",
+    "L3 production",
+    "L3 voltage",
+    "Rate 1 (day) - total consumption",
+    "Rate 1 (day) - total production",
+    "Rate 2 (night) - total consumption",
+    "Rate 2 (night) - total production",  
+    "Water consumption"
+    #"Gas consumption"
+    ]
 ```
 ```Elektricity_meter.py
 # Change your serial port here:
@@ -78,6 +115,14 @@ docker-compose up -d
 
 ### Grafana setup
 Setup grafana so it can querry data from influxdb. This can be done by simply adding a new database and fill in the fields for influxdb2.
+Login -> left botom cornor click on the gear icon and select datasource -> add influxdb database -> change querry language to flux -> in http -> url change it to http://172.19.0.3:8086 
+for AUTH chose only basic auth -> set Basic Auth Details -> change this to the influxdb username and password form the .env file
+for InfluxDB Details -> Organization, token and default bucket are in the .env file -> save and test
+
+#### Import basic dashboard
+Go to Left 4 squars and click import dahsboard -> copy and past the json dashboard data in.
+If the data is not loaded click the title name of the dashboard panel like Fase1,2 & 3 -> click edit -> click on the eye icon at the botom twice.
+Normally this should fix it or you just need to wait 1-5 minutes.
 
 ## Make it your own
 - Edit the telegraf config so you can have more data from maybe other devices of you network.
