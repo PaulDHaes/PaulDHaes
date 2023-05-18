@@ -20,29 +20,49 @@ def parse_p1_data(data):
     lines = data.split('\n')
     for line in lines:
         if line.startswith('1-0:1.8.1'):
-            data_dict['Rate_1_(day)-total_consumption'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
+            data_dict['Rate 1 (day) - total consumption'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
         elif line.startswith('1-0:1.8.2'):
-            data_dict['Rate_2_(night)-total_consumption'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
+            data_dict['Rate 2 (night) - total consumption'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
         elif line.startswith('1-0:2.8.1'):
-            data_dict['Rate_1_(day)-total_production'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
+            data_dict['Rate 1 (day) - total production'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
         elif line.startswith('1-0:2.8.2'):
-            data_dict['Rate_2_(night)-total_production'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
+            data_dict['Rate 2 (night) - total production'] = float(re.findall(r'\(([\d\.]+)\*kWh\)', line)[0])
         elif line.startswith('0-0:96.14.0'): 
             data_dict['Current_rate_(1_is_day_en_2_is_night)'] = float(re.findall(r'\((\d+)\)', line)[0])
         elif line.startswith('1-0:1.7.0'):
-            data_dict['All_phases_consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+            data_dict['All phases consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
         elif line.startswith('1-0:21.7.0'):
-            data_dict['L1_consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+            data_dict['L1 consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
         elif line.startswith('1-0:41.7.0'):
-            data_dict['L2_consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+            data_dict['L2 consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
         elif line.startswith('1-0:61.7.0'):
-            data_dict['L3_consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
-        elif line.startswith('0-0:17.0.0'):
-            data_dict['Switch_electricity'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+            data_dict['L3 consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:1.7.0'):
+            data_dict['All phases consumption'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:22.7.0'):
+            data_dict['L1 production'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:42.7.0'):
+            data_dict['L2 production'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:62.7.0'):
+            data_dict['L3 production'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:2.7.0'):
+            data_dict['All phases production'] = float(re.findall(r'\(([\d\.]+)\*kW\)', line)[0])
+        elif line.startswith('1-0:32.7.0'):
+            data_dict['L1 voltage'] = float(re.findall(r'\(([\d\.]+)\*V\)', line)[0])
+        elif line.startswith('1-0:52.7.0'):
+            data_dict['L2 voltage'] = float(re.findall(r'\(([\d\.]+)\*V\)', line)[0])
+        elif line.startswith('1-0:72.7.0'):
+            data_dict['L3 voltage'] = float(re.findall(r'\(([\d\.]+)\*V\)', line)[0])
+        elif line.startswith('1-0:31.7.0'):
+            data_dict['L1 current'] = float(re.findall(r'\(([\d\.]+)\*A\)', line)[0])
+        elif line.startswith('1-0:51.7.0'):
+            data_dict['L2 current'] = float(re.findall(r'\(([\d\.]+)\*A\)', line)[0])
+        elif line.startswith('1-0:71.7.0'):
+            data_dict['L3 current'] = float(re.findall(r'\(([\d\.]+)\*A\)', line)[0])
         elif line.startswith('0-1:24.2.1'):
-            data_dict['water_consumption'] = float(re.findall(r'\(([\d\.]+)\*m3\)', line)[0])
+            data_dict['Water consumption'] = float(re.findall(r'\(([\d\.]+)\*m3\)', line)[0])
         elif line.startswith('0-1:24.2.3'):
-            data_dict['gas_consumption'] = float(re.findall(r'\(([\d\.]+)\*m3\)', line)[0])    
+            data_dict['Gas consumption'] = float(re.findall(r'\(([\d\.]+)\*m3\)', line)[0])    
     return data_dict
 
 while True:

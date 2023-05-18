@@ -1,11 +1,10 @@
 #add usb to telegraf?, Heimdal, pihole?
-#portainer info https://portainer-notes.readthedocs.io/en/latest/configuration.html
 version: "3.3"
 services:
   telegraf:
     container_name: Telegraf
     restart: always
-    image: pauldheas/smartmeter:latest
+    image: pauldheas/smartmeter:1.2 #https://hub.docker.com/r/ubuntu/telegraf
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
