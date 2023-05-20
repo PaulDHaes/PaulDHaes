@@ -4,7 +4,7 @@ services:
   telegraf:
     container_name: Telegraf
     restart: always
-    image: pauldheas/smartmeter:1.2 #https://hub.docker.com/r/ubuntu/telegraf
+    image: pauldheas/smartmeter:latest
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
