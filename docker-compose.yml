@@ -8,8 +8,10 @@ services:
     devices: 
     - /dev/ttyUSB0:/dev/ttyUSB0
     volumes:
-    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    - ${TELEGRAF_CONFIG}:/etc/telegraf/telegraf.conf:ro
     - ./Elektricity_meter.py:/home/Elektricity_meter.py
+    env_file:
+      - .env
     depends_on:
       - influxdb
     links:
@@ -17,13 +19,10 @@ services:
     ports:
     - '127.0.0.1:8125:8125/udp'
     tty: true
-    environment: 
-      - DOCKER_INFLUXDB_INIT_ORG=Meter
-      - DOCKER_INFLUXDB_INIT_BUCKET=Pi
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
     networks:
       custom_network:
         ipv4_address: 172.19.0.2
+    command: sh -c "telegraf --config /etc/telegraf/telegraf.conf"
   portainer:
     image: portainer/portainer:latest
     restart: always
@@ -41,13 +40,9 @@ services:
       - '8086:8086'
     volumes:
       - influxdb-storage:/var/lib/influxdb
-    environment:
-      - INFLUXDB_DB=${INFLUXDB_DB}
-      - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER}
-      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
-      - DOCKER_INFLUXDB_INIT_ORG=Meter
-      - DOCKER_INFLUXDB_INIT_BUCKET=Pi
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
+    env_file:
+      - .env
+    entrypoint: ["./entrypoint.sh"]
     networks:
       custom_network:
         ipv4_address: 172.19.0.3
