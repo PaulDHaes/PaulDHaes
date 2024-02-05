@@ -1,5 +1,5 @@
 
-# Belgium/Nederlands electricity dashboard for Raspberry Pi
+# DSMR (Dutch Smart Meter Requirements) electricity dashboard for Raspberry Pi
 
 ## Prequsits
 - Raspberry pi 3b/ 3b+ /4
@@ -135,7 +135,6 @@ Normally this should fix it or you just need to wait 1-5 minutes.
 
 - [x] Update docker container
 - [ ] Add more functionality
-- [ ] Explore storrage space issue
 - [x] Add the USB baudrate in script
 - [x] Make own docker container to easly download
 - [ ] secure the communication by using SSL
