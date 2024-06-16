@@ -29,10 +29,7 @@
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -121,7 +118,7 @@
             "uid": "rkb0eAS4k"
           },
           "hide": false,
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L1 consumption\" or r[\"_field\"] == \"L2 consumption\" or r[\"_field\"] == \"L3 consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L1 consumption\" or r[\"_field\"] == \"L2 consumption\" or r[\"_field\"] == \"L3 consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -130,10 +127,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "L1 consumptie in kWh",
       "fieldConfig": {
         "defaults": {
@@ -230,10 +224,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "L2 consumptie in kWh",
       "fieldConfig": {
         "defaults": {
@@ -305,7 +296,7 @@
           "measurement": "meter_data",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L2 consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L2 consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -331,10 +322,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "L3 consumptie in kWh",
       "fieldConfig": {
         "defaults": {
@@ -406,7 +394,7 @@
           "measurement": "meter_data",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L3 consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"L3 consumption\")\n  |> filter(fn: (r) => r[\"host\"] == \"raspberry_pi\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -432,10 +420,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -502,7 +487,7 @@
             "uid": "rkb0eAS4k"
           },
           "hide": false,
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Current_rate_(1_is_day_en_2_is_night)\")\n    |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Current_rate_(1_is_day_en_2_is_night)\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"last\")",
           "refId": "A"
         }
       ],
@@ -510,10 +495,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -586,7 +568,7 @@
           "measurement": "meter_data",
           "orderByTime": "DESC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Water consumption\")\n  |> filter(fn: (r) => r[\"host\"] == \"raspberry_pi\")\n  |> aggregateWindow(every: 24h, fn: spread, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Gas consumption\")\n  |> filter(fn: (r) => r[\"host\"] == \"raspberry_pi\")\n  |> aggregateWindow(every: 24h, fn: spread, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -609,14 +591,11 @@
         }
       ],
       "timeFrom": "1d",
-      "title": "Dag verbruik water",
+      "title": "Dag verbruik gas",
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -672,7 +651,7 @@
             "type": "influxdb",
             "uid": "rkb0eAS4k"
           },
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Rate 2 (night) - total consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Rate 2 (night) - total consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -680,10 +659,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -741,7 +717,7 @@
             "uid": "rkb0eAS4k"
           },
           "hide": false,
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Rate 1 (day) - total consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Rate 1 (day) - total consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: last, createEmpty: false)\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -749,10 +725,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -761,7 +734,7 @@
             "mode": "fixed"
           },
           "decimals": 2,
-          "displayName": "Totaal water verbruik",
+          "displayName": "Totaal gas verbruik",
           "mappings": [],
           "noValue": "-",
           "thresholds": {
@@ -826,7 +799,7 @@
           "measurement": "meter_data",
           "orderByTime": "DESC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Water consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Gas consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -851,10 +824,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "VMoijl8Vk"
-      },
+      "datasource": {},
       "description": "Totaal verbruik",
       "fieldConfig": {
         "defaults": {
@@ -1009,7 +979,7 @@
           "measurement": "total_power_consumption",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"All phases consumption\")\n    |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"All phases consumption\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -1142,7 +1112,7 @@
           "measurement": "gas_meter_m3",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Gas consumption\")\n  |> filter(fn: (r) => r[\"host\"] == \"raspberry_pi\")\n    |> aggregateWindow(every: 24h, fn: spread, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"Pi\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"exec\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Gas consumption\")\n  |> filter(fn: (r) => r[\"host\"] == \"raspberry_pi\")\n  |> aggregateWindow(every: 24h, fn: spread, createEmpty: false)\n  |> yield(name: \"mean\")",
           "queryType": "randomWalk",
           "rawQuery": true,
           "refId": "A",
@@ -1177,7 +1147,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -1185,6 +1155,6 @@
   "timezone": "",
   "title": "energie + water",
   "uid": "8E1uagigk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
