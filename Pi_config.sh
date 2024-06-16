@@ -48,6 +48,7 @@ sudo rpi-update
 sudo apt-get install openssl
 influx_token=$(openssl rand -hex 32)
 sed -i "s|supercool_new_token|$influx_token|g" .env
+sed -i "s|supercool_new_token|$influx_token|g" telegraf.conf
 
 # USB permission change so docker can access the port.
 chmod 777 /dev/ttyUSB0
