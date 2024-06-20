@@ -55,20 +55,21 @@ This script reads the data from the P1 port of the smart meter and transform it 
 ### Passwords, usernames and databases are defined in the .env file
 ### Install Pi_config.sh
 This script is here if you want to start form a fresh install of Raspbian OS.
-to install launche the terminal if you use the GUI version and do:
+To install launche the terminal if you use the GUI version and do:
 ``` bash
-git clone [link of repo]
-cd [repo]
+git clone https://github.com/PaulDHaes/PaulDHaes.git
+cd PaulDHaes
 chmod +x Pi_config.sh
 ./Pi_config.sh
 ```
-*If the Pi_config.sh script is not executed pleas execute the folowoing commands*
+*If the Pi_config.sh script is not executed please execute the folowing commands*
 
 ``` bash
 apt-get update
 apt-get install docker.io docker-compose openssl
 influx_token=$(openssl rand -hex 32)
 sed -i "s|supercool_new_token|$influx_token|g" .env
+sed -i "s|supercool_new_token|$influx_token|g" telegraf.conf
 chmod 777 /dev/ttyUSB0
 ```
 
@@ -129,15 +130,13 @@ Normally this should fix it or you just need to wait 1-5 minutes.
 - Make your own custom grafana dashboards.
 - Edit the .env file to set better passwords.
 
-## Custom telegraf container?
-
 ## TODO
 
 - [x] Update docker container
 - [ ] Add more functionality
 - [x] Add the USB baudrate in script
 - [x] Make own docker container to easly download
-- [ ] secure the communication by using SSL
-- [ ] auto edit the grafana dashboard to set all the value
-- [x] make influxdb api key and put it in telegraf.conf
-- [x] edit docker network
+- [ ] Secure the communication by using SSL
+- [ ] Auto edit the grafana dashboard to set all the value
+- [x] Make influxdb api key and put it in telegraf.conf
+- [x] Edit docker network
