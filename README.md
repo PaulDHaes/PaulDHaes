@@ -125,6 +125,9 @@ Go to Left 4 squars and click import dahsboard -> copy and past the json dashboa
 If the data is not loaded click the title name of the dashboard panel like Fase1,2 & 3 -> click edit -> click on the eye icon at the botom twice.
 Normally this should fix it or you just need to wait 1-5 minutes.
 
+## Home Assistant
+Copy the provide homeassistant file in your home assistant configuration.conf file, add your values and restart home assistant
+
 ## Make it your own
 - Edit the telegraf config so you can have more data from maybe other devices of you network.
 - Make your own custom grafana dashboards.
@@ -140,3 +143,4 @@ Normally this should fix it or you just need to wait 1-5 minutes.
 - [ ] Auto edit the grafana dashboard to set all the value
 - [x] Make influxdb api key and put it in telegraf.conf
 - [x] Edit docker network
+- [ ] Add Integration with Home Assistant
