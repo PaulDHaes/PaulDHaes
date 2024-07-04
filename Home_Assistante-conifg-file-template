@@ -1,0 +1,214 @@
+# ! note it needs some tweaking for getting the right values like total consummption is not set for 1 day
+influxdb:
+  api_version: 2
+  ssl: false
+  host: ip_of_container
+  port: 8086
+  token: 'your_token'
+  organization: Meter
+  bucket: homeassistant
+  precision: s 
+  measurement_attr: domain__device_class 
+  tags_attributes:
+    - friendly_name
+    - unit_of_measurement
+    - device_class
+  ignore_attributes:
+    - state_class
+    - icon
+  include: 
+    entities:
+      - sensor.my_sensor1
+      - sensor.my_sensor2
+
+# Sensors for querying InfluxDB
+sensor:
+  - platform: influxdb
+    api_version: 2
+    host: "ip_of_container"
+    port: 8086
+    ssl: false
+    verify_ssl: false
+    token: 'your_token' # check the sh file or the .env file
+    organization: Meter
+    bucket: Pi
+    queries_flux:
+      - name: "Rate 1 (day) - total consumption"
+        unique_id: a1b2c3d4-e5f6-7a8b-9c0d-e1f2g3h4i5j6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Rate 1 (day) - total consumption")
+        group_function: last
+
+      - name: "Rate 2 (night) - total consumption"
+        unique_id: k1l2m3n4-o5p6-7q8r-9s0t-u1v2w3x4y5z6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Rate 2 (night) - total consumption")
+        group_function: last
+
+      - name: "Rate 1 (day) - total production"
+        unique_id: p1q2r3s4-t5u6-7v8w-9x0y-z1a2b3c4d5e6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Rate 1 (day) - total production")
+        group_function: last
+
+      - name: "Rate 2 (night) - total production"
+        unique_id: f1g2h3i4-j5k6-7l8m-9n0o-p1q2r3s4t5u6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Rate 2 (night) - total production")
+        group_function: last
+
+      - name: "Current rate (1 is day and 2 is night)"
+        unique_id: v1w2x3y4-z5a6-7b8c-9d0e-f1g2h3i4j5k6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Current_rate_(1_is_day_en_2_is_night)")
+        group_function: last
+
+      - name: "All phases consumption"
+        unique_id: l1m2n3o4-p5q6-7r8s-9t0u-v1w2x3y4z5a6
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "All phases consumption")
+        group_function: last
+
+      - name: "L1 consumption"
+        unique_id: cb2b6084-9cf1-4ad8-8fb9-d40b13ad9132
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L1 consumption")
+        group_function: last
+
+      - name: "L2 consumption"
+        unique_id: d2e3f4g5-h6i7-8j9k-0l1m-n2o3p4q5r6s7
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L2 consumption")
+        group_function: last
+
+      - name: "L3 consumption"
+        unique_id: t8u9v0w1-x2y3-4z5a-6b7c-8d9e0f1g2h3i
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L3 consumption")
+        group_function: last
+
+      - name: "L1 production"
+        unique_id: j4k5l6m7-n8o9-0p1q-2r3s-t4u5v6w7x8y9
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L1 production")
+        group_function: last
+
+      - name: "L2 production"
+        unique_id: a7b8c9d0-e1f2-3g4h-5i6j-7k8l9m0n1o2p
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L2 production")
+        group_function: last
+
+      - name: "L3 production"
+        unique_id: q3r4s5t6-u7v8-9w0x-1y2z-3a4b5c6d7e8f
+        range_start: "-20s"
+        unit_of_measurement: Wh
+        value_template: "{{ (value|float * 1000.0)|round(2) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L3 production")
+        group_function: last
+
+      - name: "L1 voltage"
+        unique_id: g8h9i0j1-k2l3-4m5n-6o7p-8q9r0s1t2u3v
+        range_start: "-20s"
+        unit_of_measurement: V
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L1 voltage")
+        group_function: last
+
+      - name: "L2 voltage"
+        unique_id: w4x5y6z7-a8b9-0c1d-2e3f-4g5h6i7j8k9l
+        range_start: "-20s"
+        unit_of_measurement: V
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L2 voltage")
+        group_function: last
+
+      - name: "L3 voltage"
+        unique_id: l0m1n2o3-p4q5-6r7s-8t9u-0v1w2x3y4z5a
+        range_start: "-20s"
+        unit_of_measurement: V
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L3 voltage")
+        group_function: last
+
+      - name: "L1 current"
+        unique_id: b6c7d8e9-f0g1-2h3i-4j5k-6l7m8n9o0p1q
+        range_start: "-20s"
+        unit_of_measurement: A
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L1 current")
+        group_function: last
+
+      - name: "L2 current"
+        unique_id: r9s0t1u2-v3w4-5x6y-7z8a-9b0c1d2e3f4g
+        range_start: "-20s"
+        unit_of_measurement: A
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L2 current")
+        group_function: last
+
+      - name: "L3 current"
+        unique_id: h5i6j7k8-l9m0-1n2o-3p4q-5r6s7t8u9v0w
+        range_start: "-20s"
+        unit_of_measurement: A
+        value_template: "{{ (value|float * 1.0)|round(1) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "L3 current")
+        group_function: last
+
+      - name: "Water consumption"
+        unique_id: x2y3z4a5-b6c7-8d9e-0f1g-2h3i4j5k6l7m
+        range_start: "-20s"
+        unit_of_measurement: m³
+        value_template: "{{ (value|float * 1.0)|round(3) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Water consumption")
+        group_function: last
+
+      - name: "Gas consumption"
+        unique_id: x2y3z4a5-b6c7-8d9e-0f1g-2h3i4j5k6l7m
+        range_start: "-20s"
+        unit_of_measurement: m³
+        value_template: "{{ (value|float * 1.0)|round(3) }}"
+        query: >
+          filter(fn: (r) => r["_measurement"] == "exec" and r["_field"] == "Gas consumption")
+        group_function: last
